@@ -21,13 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+a1 = [ones(size(X, 1), 1), X]; % add a1_0
 
+a2 = sigmoid(Theta1 * a1')'; % transpose for next hidden layer
 
+a2 = [ones(size(a2, 1), 1), a2]; % add a2_0
 
+[_, p] = max(sigmoid(Theta2 * a2'));
 
-
-
-
+p = p';
 
 % =========================================================================
 
