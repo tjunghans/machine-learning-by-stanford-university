@@ -62,23 +62,24 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a1 = X;
+a1 = [ones(rows(a1), 1) a1];
+a2 = sigmoid(a1 * Theta1');
+a2 = [ones(rows(a2), 1) a2];
+a3 = sigmoid(a2 * Theta2');
+h = a3;
 
+function [yv] = mapYToVec(y, num_labels)
+  yv = zeros(num_labels, 1);
+  yv(y) = 1;
+end
 
+Y = [];
+for i = 1:m
+  Y = [Y mapYToVec(y(i), num_labels)];
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = (1/m)*sum(sum((-Y') .* log(h) - (1 - Y)' .* log(1 - h)), 2);
 
 % -------------------------------------------------------------
 
