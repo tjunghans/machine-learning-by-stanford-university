@@ -64,22 +64,24 @@ Theta2_grad = zeros(size(Theta2));
 
 a1 = X;
 a1 = [ones(rows(a1), 1) a1];
-a2 = sigmoid(a1 * Theta1');
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
 a2 = [ones(rows(a2), 1) a2];
-a3 = sigmoid(a2 * Theta2');
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 h = a3;
 
 function [yv] = mapYToVec(y, num_labels)
-  yv = zeros(num_labels, 1);
+  yv = zeros(1, num_labels);
   yv(y) = 1;
 end
 
 Y = [];
 for i = 1:m
-  Y = [Y mapYToVec(y(i), num_labels)];
+  Y = [Y ; mapYToVec(y(i), num_labels)];
 end
 
-J = (1/m)*sum(sum((-Y') .* log(h) - (1 - Y)' .* log(1 - h)), 2);
+J = (1/m)*sum(sum((-Y) .* log(h) - (1 - Y) .* log(1 - h)), 2);
 
 Theta1w = Theta1(:, 2:size(Theta1, 2));
 Theta2w = Theta2(:, 2:size(Theta2, 2));
@@ -87,6 +89,17 @@ Theta2w = Theta2(:, 2:size(Theta2, 2));
 reg = (lambda/(2*m)) * (sum(sum(Theta1w .^2)) + sum(sum(Theta2w .^2)));
 
 J = J + reg;
+
+d3 = (a3 .- Y);
+d2 = (d3*Theta2).*sigmoidGradient([ones(size(z2, 1), 1) z2]);
+d2 = d2(:, 2:end);
+
+D1 = d2'*a1;
+D2 = d3'*a2; 
+
+Theta1_grad = D1/m + (lambda/m)*[zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+Theta2_grad = D2/m + (lambda/m)*[zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
+
 % -------------------------------------------------------------
 
 % =========================================================================
