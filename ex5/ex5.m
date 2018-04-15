@@ -35,12 +35,12 @@ load ('ex5data1.mat');
 m = size(X, 1);
 
 % Plot training data
-plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
-xlabel('Change in water level (x)');
-ylabel('Water flowing out of the dam (y)');
+%_plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
+%_xlabel('Change in water level (x)');
+%_ylabel('Water flowing out of the dam (y)');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%_fprintf('Program paused. Press enter to continue.\n');
+%_pause;
 
 %% =========== Part 2: Regularized Linear Regression Cost =============
 %  You should now implement the cost function for regularized linear 
@@ -53,8 +53,8 @@ J = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
 fprintf(['Cost at theta = [1 ; 1]: %f '...
          '\n(this value should be about 303.993192)\n'], J);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%_fprintf('Program paused. Press enter to continue.\n');
+%_pause;
 
 %% =========== Part 3: Regularized Linear Regression Gradient =============
 %  You should now implement the gradient for regularized linear 
@@ -68,8 +68,8 @@ fprintf(['Gradient at theta = [1 ; 1]:  [%f; %f] '...
          '\n(this value should be about [-15.303016; 598.250744])\n'], ...
          grad(1), grad(2));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%_fprintf('Program paused. Press enter to continue.\n');
+%_pause;
 
 
 %% =========== Part 4: Train Linear Regression =============
@@ -86,15 +86,15 @@ lambda = 0;
 [theta] = trainLinearReg([ones(m, 1) X], y, lambda);
 
 %  Plot fit over the data
-plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
-xlabel('Change in water level (x)');
-ylabel('Water flowing out of the dam (y)');
-hold on;
-plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
-hold off;
+%_plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
+%_xlabel('Change in water level (x)');
+%_ylabel('Water flowing out of the dam (y)');
+%_hold on;
+%_plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
+%_hold off;
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%_fprintf('Program paused. Press enter to continue.\n');
+%_pause;
 
 
 %% =========== Part 5: Learning Curve for Linear Regression =============
@@ -148,7 +148,7 @@ X_poly_val = polyFeatures(Xval, p);
 X_poly_val = bsxfun(@minus, X_poly_val, mu);
 X_poly_val = bsxfun(@rdivide, X_poly_val, sigma);
 X_poly_val = [ones(size(X_poly_val, 1), 1), X_poly_val];           % Add Ones
-
+return;
 fprintf('Normalized Training Example 1:\n');
 fprintf('  %f  \n', X_poly(1, :));
 
