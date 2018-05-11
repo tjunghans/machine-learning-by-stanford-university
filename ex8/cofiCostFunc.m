@@ -47,8 +47,8 @@ Theta_reg = lambda/2 * sum(sum(Theta.^2));
 X_reg = lambda/2 * sum(sum(X.^2));
 J = 0.5 * sum(sum(sq .* R)) + Theta_reg + X_reg;
 
-X_grad = (error_factor .* R) * Theta;
-Theta_grad = (error_factor .* R)' * X;
+X_grad = (error_factor .* R) * Theta + lambda * X;
+Theta_grad = (error_factor .* R)' * X + lambda * Theta;
 
 % =============================================================
 
